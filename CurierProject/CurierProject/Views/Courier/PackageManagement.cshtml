@@ -1,0 +1,59 @@
+﻿@using CurierProject.Domain.Extensions
+@model List<CurierProject.Models.PackageManagementViewModel>
+@{
+    ViewBag.Title = "PackageManagement";
+}
+<div class="col-md-10">
+    <h2>Package Management</h2>
+    <div class="row">
+        @if (Model != null && Model.Any())
+        {
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <th>From</th>
+                    <th>Address for pickup</th>
+                    <th>To</th>
+                    <th>Address for delivery</th>
+                    <th>Weight</th>
+                    <th>Size</th>
+                    <th>Estimated delivery date</th>
+                    <th>Get this package</th>
+                    </thead>
+                    <tbody>
+                        @foreach (var package in Model)
+                        {
+                            <tr>
+                                <td>@package.Sender.GetFullName()</td>
+                                <td>@package.Sender.Address</td>
+                                <td>@package.Recipient.GetFullName()</td>
+                                <td>@package.Recipient.Address</td>
+                                <td>@package.PackageWeight</td>
+                                <td>@package.PackageSize.GetDisplayName()</td>
+                                <td>
+                                    @if (package.EstimatedDeliveryDate != null)
+                                    {
+                                        @package.EstimatedDeliveryDate.Value.ToString("D")
+                                    }
+                                    else
+                                    {
+                                        @: No Estimated Delivery Date
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("GetThisPackage", "Courier", new { id = package.ID, shipmentID = package.ShipmentID })" class="btn btn-primary">Get package</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info" role="alert">
+                <label class="text-danger">There is no package in this time to be delivered!</label>
+            </div>
+        }
+    </div>
+</div>

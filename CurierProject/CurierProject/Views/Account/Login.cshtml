@@ -1,0 +1,33 @@
+﻿@model CurierProject.Models.LoginViewModel
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+@*<h2>Login Page</h2>*@
+<div class="offset-md-5 col-md-2 pt-5">
+    @using (Html.BeginForm("Login", "Account"))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Email </span>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+        @Html.ValidationMessageFor(m => m.Email)
+
+        <div class="input-group mb-3">
+            <span class="input-group-text">Password </span>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+        @Html.ValidationMessageFor(m => m.Password)
+        <div class="row">
+            <div class="offset-md-3 col-md-6">
+                <div class="d-grid gap-2">
+                    <input class="btn btn-outline-primary" type="submit" value="Login">
+                    <a href="@Url.Action("Register", "Account")" class="btn btn-outline-secondary">Register</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

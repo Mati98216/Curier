@@ -1,0 +1,44 @@
+﻿@using CurierProject.Domain.Extensions
+@model List<CurierProject.Models.PackageInformationViewModel>
+
+@{
+    ViewBag.Title = "title";
+}
+
+<div class="col-md-10">
+    <h2>Courier Dashboard</h2>
+<div class="row">
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <th>Recipient</th>
+                <th>Weight</th>
+                <th>Size</th>
+                <th>Status</th>
+                <th>Get details</th>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Recipient.GetFullName()</td>
+                            <td>@item.PackageWeight</td>
+                            <td>@item.PackageSize.GetDisplayName()</td>
+                            <td>@item.Status.GetDisplayName()</td>
+                            <td><a href="@Url.Action("PackageDetails", "Courier", new { id = @item.ID })" class="btn btn-primary">Package details</a></td>
+                        </tr>
+                    }
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            <label class="text-danger">You don't have currently any packages assignment to you!</label>
+        </div>
+    }
+</div>
+</div>
+

@@ -1,0 +1,48 @@
+﻿@model CurierProject.Models.CreateNewPackageViewModel
+@{
+    ViewBag.Title = "CreateNewPackage";
+}
+
+<div class="col-md-10">
+
+
+    @using (Html.BeginForm("Create", "Home"))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.SenderID)
+
+        <div class="row pt-2">
+            <div class="offset-md-3 col-md-4">
+                <h2>CreateNewPackage</h2>
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Recipient email</span>
+                    @Html.TextBoxFor(m => m.RecipientEmail, new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(m => m.RecipientEmail)
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Weight </span>
+                    @Html.TextBoxFor(m => m.Weight, new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(m => m.Weight)
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Size </span>
+                    @Html.EnumDropDownListFor(m => m.Size, new { @class = "form-select" })
+                </div>
+                @Html.ValidationMessageFor(m => m.Size)
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Description </span>
+                    @Html.TextAreaFor(m => m.RecipientEmail, new { @class = "form-control" })
+                </div>
+                @Html.ValidationMessageFor(m => m.RecipientEmail)
+
+                <div class="d-grid">
+                    <button type="submit" value="Create new package" class="btn btn-outline-primary">Create new package</button>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>

@@ -1,0 +1,26 @@
+﻿@using CurierProject.Domain.Extensions
+@model CurierProject.Models.PackegeDetailViewModel
+@{
+    ViewBag.Title = "PackageDetails";
+}
+
+<div class="col-md-10">
+    <h2>Yours Package</h2>
+    <div class="table-responsive">
+        <label for="package_id" class="form-label">Numer przesyłki</label>
+        <input type="text" readonly id="package_id" placeholder="" value=@Model.Id>
+
+        <label for="ShipmentDate" class="form-label">Zlecono</label>
+        <input type="text" readonly id="ShipmentDate" placeholder="" value=@Model.ShipmentDate>
+
+        <label for="Status" class="form-label">Status</label>
+        <input type="text" readonly id="Status" placeholder="" value=@Model.Status>
+
+        <label for="Recipient" class="form-label">Odbiorca</label>
+        <input type="text" readonly id="Recipient" placeholder="" value=@Model.Recipient>
+
+        <label for="CFirstName" class="form-label">Kurier</label>
+        <input type="text" readonly id="CFirstName" placeholder="" value=@Model.CFirstName>
+        <input type="text" readonly id="CPhone" placeholder="" value=@Model.CPhone>
+    </div>
+</div>

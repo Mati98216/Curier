@@ -1,0 +1,66 @@
+﻿@using CurierProject.Domain.Extensions
+@model CurierProject.Models.PackageInformationViewModel
+@{
+    ViewBag.Title = "PackageDetails";
+}
+<div class="col-md-10">
+    <div class="row">
+        <div class="offset-md-2 col-md-2">
+            <h2 class="text-center">Sender:</h2>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Name</span>
+                <input type="text" class="form-control" value="@Model.Sender.GetFullName()" disabled="disabled" />
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Address</span>
+                <input type="text" class="form-control" value="@Model.Sender.Address" disabled="disabled" />
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Phone</span>
+                <input type="text" class="form-control" value="@Model.Sender.Phone" disabled="disabled" />
+            </div>
+        </div>
+        <div class="offset-md-2 col-md-2">
+            <h2 class="text-center">Recipient:</h2>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Name</span>
+                <input type="text" class="form-control" value="@Model.Recipient.GetFullName()" disabled="disabled" />
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Address</span>
+                <input type="text" class="form-control" value="@Model.Recipient.Address" disabled="disabled" />
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text">Phone</span>
+                <input type="text" class="form-control" value="@Model.Recipient.Phone" disabled="disabled" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-4 col-md-2">
+            <div class="input-group mb-3">
+                <span class="input-group-text">Package status</span>
+                <input type="text" class="form-control" value="@Model.Status.GetDisplayName()" disabled="disabled" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="offset-md-4 col-md-2 d-grid">
+            <a asp-controller="administratorPerson" asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">Deliver package</a>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            @Html.Action("EditPackageStatus", "Courier", new { id = Model.ID }) ;
+        </div>
+    </div>
+
+</div>
+@Scripts.Render("~/bundles/jquery")
+

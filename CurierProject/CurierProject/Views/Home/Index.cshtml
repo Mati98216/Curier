@@ -1,0 +1,48 @@
+﻿@using CurierProject.Domain.Extensions
+@model List<CurierProject.Models.UsersPackegesViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="col-md-10">
+    <h2>Your Page</h2>
+    @if (Model != null && Model.Any())
+    {
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <th>Id</th>
+                <th>ShipmentDate</th>
+                <th>Status</th>
+                <th>Recipient</th>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.ShipmentDate</td>
+                            <td>@item.Status.GetDisplayName()</td>
+                            <td>@item.Recipient</td>
+                            <td>
+                                @if (item.IsCourierAssigment)
+                                {
+                                    <a href="@Url.Action("PackageDetails", "Home", new { id = @item.Id })" class="btn btn-primary">Package details</a>
+                                }
+                                else
+                                {
+                                    @: No Courier Assigment
+                                }
+                            </td>
+                        </tr>
+                    }
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            <label class="text-danger">You don't have currently any packages!</label>
+        </div>
+    }
+</div>
+

@@ -1,0 +1,67 @@
+﻿@using CurierProject.Domain.Extensions
+
+@model List<CurierProject.Models.AdministrationsViewModel>
+@{
+    ViewBag.Title = "User Administration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-10">
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Add New User
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            @Html.Action("AddUser", "Administrations", new { id = 0 }) ;
+        </div>
+    </div>
+    <table class="table table-responsive table-hover">
+
+        <thead>
+            <tr class="table-active">
+
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Addres</th>
+                <th>Role</th>
+                <th>IS Active</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody>
+
+            @if (Model != null && Model.Any())
+            {
+                foreach (var administratorPerson in Model)
+                {
+                    <tr class=@(administratorPerson.IsActive? "" : "text-decoration-line-through")>
+
+                        <td>@administratorPerson.FirstName</td>
+                        <td>@administratorPerson.LastName</td>
+                        <td>@administratorPerson.Email</td>
+                        <td>@administratorPerson.Phone</td>
+                        <td>@administratorPerson.Address</td>
+                        <td>@administratorPerson.Role</td>
+                        <td>@administratorPerson.IsActive</td>
+                        <td>
+
+                            <a asp-controller="administratorPerson" asp-action="Edit" asp-route-id="@administratorPerson.ID" class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("Edit", "Administrations" , new { id=administratorPerson.ID }) + "'");">Edit</a>
+                            
+
+                            <a asp-controller="administratorPerson" asp-action="Delete" asp-route-id="@administratorPerson.ID" class="btn btn-danger" onclick="@("window.location.href='" + @Url.Action("Delete", "Administrations" , new { id=administratorPerson.ID }) + "'");" >Delete</a>
+
+                        </td>
+                    </tr>
+                }
+
+            }
+
+        </tbody>
+    </table>
+</div>
+
